@@ -18,6 +18,9 @@
 <script>
 import axios from 'axios';
 import PokemonView from './components/PokemonView.vue'
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 export default {
   name: 'App',
