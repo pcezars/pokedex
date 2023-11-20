@@ -4,12 +4,12 @@
       <img src="./assets/pokedex.png">
       <hr>
       <h4 class="is-size-4">Pokédex</h4>
-      <input type="text" placeholder="Buscar pokémon pelo nome" v-model="busca" class="input is-rounded">
-      <button class="button is-fullwidth is-success" id="buscaBtn" @click="buscar">Buscar</button>
-      <div v-if="filteredPokemons != undefined">
-        <div v-for="(poke, index) in filteredPokemons" :key="poke.url">
+      <input type="text" placeholder="Digite o nome do Pokémon" v-model="busca" class="input is-rounded">
+      <!-- <button class="button is-fullwidth is-success" id="buscaBtn" @click="buscar">Buscar</button> -->
+      <!-- <div v-if="filteredPokemons != undefined"> -->
+        <div v-for="(poke, index) in resultadoBusca" :key="poke.url">
         <PokemonView :name="poke.name" :url="poke.url" :num="index+1"/>
-      </div>
+      <!-- </div> -->
       </div>
     </div>    
   </div>
@@ -41,23 +41,23 @@ export default {
     PokemonView
   },
   methods: {
-    buscar: function(){
-      this.filteredPokemons = this.pokemons;
-      if(this.busca == '' || this.busca == ' '){
-        this.filteredPokemons = [];
-      }else{
-        this.filteredPokemons = this.pokemons.filter(pokemon => pokemon.name.toLowerCase() == this.busca.toLowerCase());
-      }
-    }
-  },
-  computed: {
-    // resultadoBusca: function(){
+    // buscar: function(){
+    //   this.filteredPokemons = this.pokemons;
     //   if(this.busca == '' || this.busca == ' '){
-    //     return this.pokemons;
+    //     this.filteredPokemons = [];
     //   }else{
-    //     return this.pokemons.filter(pokemon => pokemon.name == this.busca)
+    //     this.filteredPokemons = this.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.busca.toLowerCase()));
     //   }
     // }
+  },
+  computed: {
+    resultadoBusca: function(){
+      if(this.busca == '' || this.busca == ' '){
+        return this.filteredPokemons;
+      }else{
+        return this.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.busca.toLowerCase()));
+      }
+    }
   }
 }
 </script>
